@@ -131,7 +131,7 @@ int main(void)
 
                             if (yesNoSpeler = 121)
                             {
-                                printf("werlt");
+                                printf("werkt niet.");
                                 return 0;
                             }
                             else if (yesNoSpeler = 110)
