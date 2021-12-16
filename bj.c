@@ -62,6 +62,7 @@ int main(void)
             getchar();
 
             volgendeStap = userInput;
+            break;
 
 
         //Deze stap verzamelt de naam & inzet.
@@ -74,6 +75,7 @@ int main(void)
             scanf("%d", &inzet);
 
             volgendeStap = spel;
+            break;
 
         //Hier begint het spel.
         case spel:
@@ -89,78 +91,65 @@ int main(void)
 
                 fsmState volgStap = start;
 
-                while (1)
-                {
-                switch(volgStap)
-                case start:
-                    system("cls");
-                    system("mode con: lines=70");
-                    system("color 0E");
-
-                    //begin kaarten van de speler
-                    for(int i = 0; i < BEGIN_KAARTEN; i++)
+                    while (1)
                     {
-                        spelerNum[i] = geefKaart();
+                        char yesNoSpeler;
+                        switch(volgStap)
+                        {
+                        case start:
+                            system("cls");
+                            system("mode con: lines=70");
+                            system("color 0E");
+
+                            //begin kaarten van de speler
+                            for(int i = 0; i < BEGIN_KAARTEN; i++)
+                            {
+                            spelerNum[i] = geefKaart();
+                            }
+
+                            int spelerHvl, bankHvl;
+                            spelerHvl = spelerNum[0] + spelerNum[1];
+                            printf("U heeft op dit moment %d.\n", spelerHvl);
+                            printf("----------------------------------------------\n");
+
+                            //begin kaarten bank
+                            for(int i = 0; i < BEGIN_KAARTEN; i++)
+                            {
+                                bankNum[i] = geefKaart();
+                            }
+
+                            bankHvl = bankNum[0] + bankNum[1];
+                            printf("De bank heeft %d.\n", bankHvl);
+                            printf("----------------------------------------------\n");
+
+                            volgStap = keuzeSpeler;
+                            break;
+
+                        case (keuzeSpeler):
+                            printf("Wilt u nog een kaart? (y/n): \n");
+                            scanf("%a", &yesNoSpeler);
+
+                            if (yesNoSpeler = 121)
+                            {
+                                printf("werlt");
+                                return 0;
+                            }
+                            else if (yesNoSpeler = 110)
+                            {
+                                printf("test");
+                                return 0;
+                            }
+                            else
+                            {
+                                printf("error");
+                                return 0;
+                            }
+                        }
                     }
-
-                    int spelerHvl, bankHvl;
-                    spelerHvl = spelerNum[0] + spelerNum[1];
-                    printf("U heeft op dit moment %d.\n", spelerHvl);
-                    printf("----------------------------------------------\n");
-
-                    //begin kaarten bank
-                    for(int i = 0; i < BEGIN_KAARTEN; i++)
-                    {
-                        bankNum[i] = geefKaart();
-                    }
-
-                    bankHvl = bankNum[0] + bankNum[1];
-                    printf("De bank heeft %d.\n", bankHvl);
-                    printf("----------------------------------------------\n");
-
-                    volgStap = keuzeSpeler;
-
-                case keuzeSpeler:
-
-                    printf("Test");
-                    return 0;
-
                 }
-
-
-                /*
-                for(int i = 0; i < BEGIN_KAARTEN; i++)
-                {
-                    spelerNum[i] = geefKaart();
-                    asdfasdfasdfasdfsdaf
-                    asdf
-                    asdf
-                    sad
-                    f
-                    asdf
-                    asdf
-                    as
-                    fd
-
-                }
-
-                /*
-                int spelerHvl;
-                spelerHvl = spelerNum[0] + spelerNum[1];
-                while (spelerHvl <= 21)
-                {
-                    printf("Je hebt %d, wil je nog een kaart?", spelerHvl);
-                    return 0;
-                }
-                printf("test");
-                return 0;
-                */
-
             }
         }
     }
-
-}
 
 int geefKaart()
 {
