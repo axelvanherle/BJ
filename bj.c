@@ -126,24 +126,24 @@ int main(void)
                             break;
 
                         case (keuzeSpeler):
-                            printf("Wilt u nog een kaart? (y/n): \n");
-                            scanf("%a", &yesNoSpeler);
 
-                            if (yesNoSpeler = 121)
+                            while (yesNoSpeler != 'n')
                             {
-                                printf("werkt niet.");
-                                return 0;
+                            printf("Wilt u nog een kaart krijgen? (y/n): \n");
+                            scanf("%c", &yesNoSpeler);
+
+                            printf("test\n");
+                            printf("test\n");
+                            printf("test\n");
+                            printf("test\n");
+
                             }
-                            else if (yesNoSpeler = 110)
-                            {
-                                printf("test");
-                                return 0;
-                            }
-                            else
-                            {
-                                printf("error");
-                                return 0;
-                            }
+
+                            volgStap = keuzeBank;
+                        break;
+                        case (keuzeBank):
+                            printf("test");
+                            return 0;
                         }
                     }
                 }
