@@ -132,6 +132,16 @@ int main(void)
                 for(int i = 0; i < BEGIN_KAARTEN; i++)
                 {
                     spelerNum[i] = geefKaart();
+                    asdfasdfasdfasdfsdaf
+                    asdf
+                    asdf
+                    sad
+                    f
+                    asdf
+                    asdf
+                    as
+                    fd
+
                 }
 
                 /*
