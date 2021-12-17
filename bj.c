@@ -127,17 +127,20 @@ int main(void)
 
                         case (keuzeSpeler):
 
-                            while (yesNoSpeler != 'n')
+                            do
                             {
                             printf("Wilt u nog een kaart krijgen? (y/n): \n");
-                            scanf("%c", &yesNoSpeler);
+
+                            yesNoSpeler = getchar();
 
                             printf("test\n");
                             printf("test\n");
                             printf("test\n");
                             printf("test\n");
 
+                            putchar(yesNoSpeler);
                             }
+                            while (yesNoSpeler != 'n');
 
                             volgStap = keuzeBank;
                         break;
