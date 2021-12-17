@@ -49,6 +49,11 @@ int main(void)
     int bankNum[10];
     int inzet;
     int loop = 0;
+    int bijhoudenSpeler = 2;
+    int bijhoudenBank = 2;
+    int spelerHvl = 0;
+    int bankHvl = 0;
+    char yesNoSpeler;
 
     fsmState volgendeStap = uitleg;
 
@@ -100,10 +105,6 @@ int main(void)
 
                     while (loop)
                     {
-                        int bijhoudenSpeler = 2;
-                        int bijhoudenBank = 2;
-                        int spelerHvl, bankHvl;
-                        char yesNoSpeler;
                         switch(volgStap)
                         {
                         case start:
@@ -115,9 +116,8 @@ int main(void)
                             for(int i = 0; i < BEGIN_KAARTEN; i++)
                             {
                             spelerNum[i] = geefKaart(spelerHvl);
+                            spelerHvl += spelerNum[i];
                             }
-
-                            spelerHvl = spelerNum[0] + spelerNum[1];
                             printf("U heeft op dit moment %d.\n", spelerHvl);
                             printf("----------------------------------------------\n");
 
@@ -125,9 +125,9 @@ int main(void)
                             for(int i = 0; i < BEGIN_KAARTEN; i++)
                             {
                                 bankNum[i] = geefKaart(bankHvl);
+                                bankHvl += bankNum [i];
                             }
 
-                            bankHvl = bankNum[0] + bankNum[1];
                             printf("De bank heeft %d.\n", bankHvl);
                             printf("----------------------------------------------\n");
 
@@ -234,6 +234,10 @@ int main(void)
                                 memset (bankNum, 0, sizeof bankNum);
                                 inzet = 0;
                                 loop = 0;
+                                bijhoudenSpeler = 2;
+                                bijhoudenBank = 2;
+                                spelerHvl = 0;
+                                bankHvl = 0;
 
                                 volgendeStap = uitleg;
                                 break; //breekt uit switch
@@ -252,13 +256,10 @@ int geefKaart(int som)
 	{
 	  case 1: //aas
 	    score = kaart1();
-
         if (som > 10)
         {
             score = 1;
         }
-
-
 	    break;
 	  case 2:
 	    score = kaart2();
@@ -301,6 +302,7 @@ int geefKaart(int som)
 	    printf("Woops something went horribly wrong ... ");
 	    break;
 	}
+	printf("%d", score);
 	return score;
 }
 
@@ -312,7 +314,7 @@ int randomKaart()
 
 int kaart1()
 {
-  int a=0;
+  int a=11;
 	char invoerGebruiker[10] = "";
   printf(" _________ \n");
   printf("|A        |\n");
@@ -560,7 +562,6 @@ void credits(void)
 
 void printScore (int win, int inzet2)
 {
-    printf("%d", inzet2);
     if (win)
     {
         inzet2 *= 2.5;
