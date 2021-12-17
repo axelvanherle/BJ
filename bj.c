@@ -29,6 +29,7 @@ int kaart13();
 int randomKaart();
 void printIntro(void);
 void credits(void);
+void printScore (int win, int inzet2);
 
 typedef enum
 {
@@ -57,6 +58,7 @@ int main(void)
         {
         //Deze stap print de intro.
         case uitleg:
+            fflush(stdin);
             loop = 1;
             system("cls");
             system("color 0A");
@@ -98,9 +100,10 @@ int main(void)
 
                     while (loop)
                     {
-                        int bijhoudenSpeler, bijhoudenBank = 2;
+                        int bijhoudenSpeler = 2;
+                        int bijhoudenBank = 2;
                         int spelerHvl, bankHvl;
-                        char yesNoSpeler, yesNoSpeler2;
+                        char yesNoSpeler;
                         switch(volgStap)
                         {
                         case start:
@@ -134,28 +137,24 @@ int main(void)
                         case (keuzeSpeler):
 
                             fflush(stdin);
-                            printf("Wilt u nog een kaart? 1(y/n): \n");
+                            printf("Wilt u nog een kaart? (y/n): \n");
                             yesNoSpeler = getchar();
 
                             if (yesNoSpeler == 'y')
                             {
                                 spelerNum[bijhoudenSpeler] = geefKaart(spelerHvl);
-                                printf("test\n");
-                                spelerHvl = spelerHvl + spelerNum[bijhoudenSpeler];
-                                printf("1213");
+                                spelerHvl += spelerNum[bijhoudenSpeler];
                                 bijhoudenSpeler++;
-                                printf("sddssdds");
-                                printf("%d", spelerHvl);
+                                printf("\nU heeft nu %d\n", spelerHvl);
                                 if (spelerHvl == 21)
                                 {
-                                    printf("\nU heeft nu %d, u heeft dus gewonnen!", spelerHvl);
-                                    printf("\n----------------------------------------------\n");
+                                    printScore(1, inzet);
                                     volgStap = cleanup;
                                     break;
                                 }
                                 else if (spelerHvl > 21)
                                 {
-                                    printf("\n U heeft %d dus u heeft verloren.", spelerHvl);
+                                    printScore(0,0);
                                     volgStap = cleanup;
                                     break;
                                 }
@@ -184,7 +183,19 @@ int main(void)
                                 bankHvl += bankNum[bijhoudenBank];
                                 bijhoudenBank++;
 
-                                printf("%d", bankHvl);
+                                printf("\nDe bank heeft %d\n", bankHvl);
+                            }
+                            if (bankHvl > 21)
+                            {
+                                printScore(1, inzet);
+                                volgStap = cleanup;
+                                break;
+                            }
+                            if (bankHvl == 21)
+                            {
+                                printScore(0,0);
+                                volgStap = cleanup;
+                                break;
                             }
                             if (yesNoSpeler == 'n')
                             {
@@ -206,18 +217,17 @@ int main(void)
                         case (score):
                                 if (spelerHvl > bankHvl)
                                 {
-                                    printf("gewonnen");
-                                    inzet *= 2.5;
-                                    printf("%d", inzet);
+                                    printScore(1, inzet);
                                 }
                                 else
                                 {
-                                    printf("verloren");
+                                    printScore(0, 0);
                                 }
                                 volgStap = cleanup;
                                 break;
 
                         case (cleanup):
+                                printf("\n");
                                 system("pause");
                                 memset (naam, '/0', sizeof naam);
                                 memset (spelerNum, 0, sizeof spelerNum);
@@ -546,4 +556,18 @@ void credits(void)
     printf("| (__) || :\/:  || :\/:  |\n");
     printf("| '--'T|| '--'I|| '--'M|\n");
     printf("`------'`------'`------'\n");
+}
+
+void printScore (int win, int inzet2)
+{
+    printf("%d", inzet2);
+    if (win)
+    {
+        inzet2 *= 2.5;
+        printf("U heeft gewonnen! U gewonnen bedrag is %d", inzet2);
+    }
+    else
+    {
+        printf("U heeft verloren, u bent dus uw inzet kwijt");
+    }
 }
