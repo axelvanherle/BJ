@@ -93,7 +93,7 @@ int main(void)
 
                     while (1)
                     {
-                        char yesNoSpeler;
+                        char yesNoSpeler, yesNoSpeler2;
                         switch(volgStap)
                         {
                         case start:
@@ -126,25 +126,50 @@ int main(void)
                             break;
 
                         case (keuzeSpeler):
-
-                            do
-                            {
-                            printf("Wilt u nog een kaart krijgen? (y/n): \n");
-
+                            fflush(stdin);
+                            printf("Wilt u nog een kaart? (y/n): \n");
                             yesNoSpeler = getchar();
 
-                            printf("test\n");
-                            printf("test\n");
-                            printf("test\n");
-                            printf("test\n");
+                            if (yesNoSpeler == 'y')
+                            {
+                                spelerNum[2] = geefKaart();
+                                spelerHvl = spelerHvl + spelerNum[2];
+                                while(1)
+                                {
+                                    fflush(stdin);
+                                    printf("U heeft nu %d. Wilt u nog een kaart? (y/n) \n", spelerHvl);
+                                    yesNoSpeler2 = getchar();
 
-                            putchar(yesNoSpeler);
+                                    if (yesNoSpeler2 == 'n')
+                                    {
+                                        volgStap = keuzeBank;
+                                        break;
+                                    }
+                                    else if (yesNoSpeler2 == 'y')
+                                    {
+                                        printf("test");
+                                        return 0;
+                                    }
+                                    else
+                                    {
+                                        printf("U kan alleen kiezen uit y/n. Probeer opnieuw. \n\n\n");
+                                    }
+                                }
                             }
-                            while (yesNoSpeler != 'n');
-
+                            else if (yesNoSpeler == 'n')
+                            {
+                                volgStap = keuzeBank;
+                                break;
+                            }
+                            else
+                            {
+                                printf("U kan alleen kiezen uit y/n. Probeer opnieuw. \n");
+                                break;
+                            }
                             volgStap = keuzeBank;
                         break;
                         case (keuzeBank):
+                            system("color AF");
                             printf("test");
                             return 0;
                         }
