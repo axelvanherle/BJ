@@ -71,8 +71,11 @@ int main(void)
             system("color 0A");
             printf("Geef uw naam in: ");
             scanf("%25s", &naam);
-            printf("Geef uw inzet in: ");
+            printf("\nWelkom %s, veel speelplezier!\n", naam);
+            printf("Wat is uw inzet?: ");
             scanf("%d", &inzet);
+
+            //while loop vragen om inzet te confirmen.
 
             volgendeStap = spel;
             break;
@@ -85,14 +88,15 @@ int main(void)
                     start,
                     keuzeSpeler,
                     keuzeBank,
-                    controleSpeler,
-                    controleBank
+                    score,
+                    cleanup
                 }fsmState2;
 
                 fsmState2 volgStap = start;
 
                     while (1)
                     {
+                        int bijhoudenSpeler, bijhoudenBank = 2;
                         char yesNoSpeler, yesNoSpeler2;
                         switch(volgStap)
                         {
@@ -126,34 +130,33 @@ int main(void)
                             break;
 
                         case (keuzeSpeler):
+
                             fflush(stdin);
-                            printf("Wilt u nog een kaart? (y/n): \n");
+                            printf("Wilt u nog een kaart? 1(y/n): \n");
                             yesNoSpeler = getchar();
 
                             if (yesNoSpeler == 'y')
                             {
-                                spelerNum[2] = geefKaart();
-                                spelerHvl = spelerHvl + spelerNum[2];
-                                while(1)
-                                {
-                                    fflush(stdin);
-                                    printf("U heeft nu %d. Wilt u nog een kaart? (y/n) \n", spelerHvl);
-                                    yesNoSpeler2 = getchar();
+                                spelerNum[bijhoudenSpeler] = geefKaart();
+                                spelerHvl = spelerHvl + spelerNum[bijhoudenSpeler];
+                                bijhoudenSpeler++;
 
-                                    if (yesNoSpeler2 == 'n')
-                                    {
-                                        volgStap = keuzeBank;
-                                        break;
-                                    }
-                                    else if (yesNoSpeler2 == 'y')
-                                    {
-                                        printf("test");
-                                        return 0;
-                                    }
-                                    else
-                                    {
-                                        printf("U kan alleen kiezen uit y/n. Probeer opnieuw. \n\n\n");
-                                    }
+                                printf("%d", spelerHvl);
+                                if (spelerHvl == 21)
+                                {
+                                    printf("\nU heeft nu %d, u heeft dus gewonnen!", spelerHvl);
+                                    printf("\n----------------------------------------------\n");
+                                    return 0;
+                                }
+                                else if (spelerHvl > 21)
+                                {
+                                    printf("\n U heeft %d dus u heeft verloren.", spelerHvl);
+                                    return 0;
+                                }
+                                else
+                                {
+                                    volgStap = keuzeBank;
+                                    break;
                                 }
                             }
                             else if (yesNoSpeler == 'n')
@@ -163,17 +166,63 @@ int main(void)
                             }
                             else
                             {
-                                printf("U kan alleen kiezen uit y/n. Probeer opnieuw. \n");
+                                printf("\n\nU kan alleen kiezen uit y/n. Probeer opnieuw. \n");
                                 break;
                             }
                             volgStap = keuzeBank;
                         break;
                         case (keuzeBank):
-                            system("color AF");
-                            printf("test");
-                            return 0;
+                            if (bankHvl < 17)
+                            {
+                                bankNum[bijhoudenBank] = geefKaart();
+                                bankHvl += bankNum[bijhoudenBank];
+                                bijhoudenBank++;
+
+                                printf("%d", bankHvl);
+                            }
+                            if (yesNoSpeler == 'n')
+                            {
+                                if (bankHvl < 17)
+                                {
+                                    volgStap = keuzeBank;
+                                }
+                                else
+                                {
+                                    volgStap = score;
+                                }
+                            }
+                            else
+                            {
+                                volgStap = keuzeSpeler;
+                            }
+                            break;
+
+                        case (score):
+                                if (spelerHvl > bankHvl)
+                                {
+                                    printf("gewonnen");
+                                    inzet *= 2.5;
+                                    printf("%d", inzet);
+                                }
+                                else
+                                {
+                                    printf("verloren");
+                                    return 0;
+                                }
+                                volgStap = cleanup;
+
+                        case (cleanup):
+                                memset (naam, '/0', sizeof naam);
+                                memset (spelerNum, 0, sizeof spelerNum);
+                                memset (bankNum, 0, sizeof bankNum);
+                                inzet = 0;
+
+                                volgendeStap = uitleg;
+                                break; //breekt uit switch
                         }
+                        break; //breekt uit while loop
                     }
+                    break;
                 }
             }
         }
