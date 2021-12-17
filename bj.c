@@ -228,6 +228,7 @@ int main(void)
 
                         case (cleanup):
                                 printf("\n");
+                                credits();
                                 system("pause");
                                 memset (naam, '/0', sizeof naam);
                                 memset (spelerNum, 0, sizeof spelerNum);
@@ -302,7 +303,6 @@ int geefKaart(int som)
 	    printf("Woops something went horribly wrong ... ");
 	    break;
 	}
-	printf("%d", score);
 	return score;
 }
 
@@ -565,10 +565,12 @@ void printScore (int win, int inzet2)
     if (win)
     {
         inzet2 *= 2.5;
+        printf("\n----------------------------------------------\n");
         printf("U heeft gewonnen! U gewonnen bedrag is %d", inzet2);
     }
     else
     {
-        printf("U heeft verloren, u bent dus uw inzet kwijt");
+        printf("\n----------------------------------------------\n");
+        printf("U heeft verloren, u bent dus uw inzet kwijt.");
     }
 }
