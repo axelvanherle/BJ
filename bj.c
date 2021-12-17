@@ -87,9 +87,9 @@ int main(void)
                     keuzeBank,
                     controleSpeler,
                     controleBank
-                }fsmState;
+                }fsmState2;
 
-                fsmState volgStap = start;
+                fsmState2 volgStap = start;
 
                     while (1)
                     {
