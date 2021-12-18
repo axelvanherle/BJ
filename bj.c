@@ -31,7 +31,7 @@ void printIntro(void);
 void credits(void);
 void printScore (int win, int inzet2);
 
-typedef enum
+typedef enum //eerste finite state machine.
 {
     spel,
     uitleg,
@@ -68,7 +68,7 @@ int main(void)
             system("cls");
             system("color 0A");
             printIntro();
-            getchar();
+            system("pause");
 
             volgendeStap = userInput;
             break;
@@ -92,7 +92,7 @@ int main(void)
         //Hier begint het spel.
         case spel:
             {
-                typedef enum
+                typedef enum   //tweede finite state machine.
                 {
                     start,
                     keuzeSpeler,
@@ -107,6 +107,7 @@ int main(void)
                     {
                         switch(volgStap)
                         {
+                        //geeft twee kaarten een speler en bank.
                         case start:
                             system("cls");
                             system("mode con: lines=70");
@@ -136,7 +137,8 @@ int main(void)
 
                         case (keuzeSpeler):
 
-                            fflush(stdin);
+                            //speler kiest of hij nog een kaart wilt.
+                            fflush(stdin);  //buffer, soms doet hij raar als ik dit niet doe.
                             printf("Wilt u nog een kaart? (y/n): \n");
                             yesNoSpeler = getchar();
 
@@ -177,6 +179,8 @@ int main(void)
                             volgStap = keuzeBank;
                         break;
                         case (keuzeBank):
+
+                            //bank kiest of hij nog een kaart wilt. Als hij minder dan 17 heeft raapt hij nog een kaart.
                             if (bankHvl < 17)
                             {
                                 bankNum[bijhoudenBank] = geefKaart(bankHvl);
@@ -215,6 +219,8 @@ int main(void)
                             break;
 
                         case (score):
+
+                                //code die beslist wie wint.
                                 if (spelerHvl > bankHvl)
                                 {
                                     printScore(1, inzet);
@@ -227,6 +233,8 @@ int main(void)
                                 break;
 
                         case (cleanup):
+
+                                //reset al de values die niet in een while loop zitten, als ik dit niet doe werkt de fsm niet.
                                 printf("\n");
                                 credits();
                                 system("pause");
@@ -255,7 +263,7 @@ int geefKaart(int som)
 	int score = 0;
 	switch (kaart)
 	{
-	  case 1: //aas
+	  case 1: //code die beslist of aas 1 of 11 is.
 	    score = kaart1();
         if (som > 10)
         {
@@ -533,7 +541,6 @@ void printIntro(void)
 	printf("\\____/\\_____/\\_| |_/\\____/\\_| \\_/\\____/\\_| |_/\\____/\\_| \\_/\n");
 
 	printf("\n\nHet doel van Black Jack is winnen van de bank. Je wint als je meer punten hebt dan de bank, maar niet meer dan 21.\nJe wilt dus zo dicht mogenlijk bij 21 te komen, zonder erover te gaan.\n");
-	printf("\nDuw op enter als U klaar bent ...");
 }
 
 void credits(void)
