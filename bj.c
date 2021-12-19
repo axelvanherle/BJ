@@ -31,7 +31,7 @@ void printIntro(void);
 void credits(void);
 void printScore (int win, int inzet2);
 
-typedef enum //eerste finite state machine.
+typedef enum //eerste finite state machine deze gaat door de stappen tot aan spel.
 {
     spel,
     uitleg,
@@ -45,8 +45,11 @@ int main(void)
     srand(time(NULL)); //Random seed
 
     char naam[26];
+
+    // In deze array sla ik de waarde op van kaarte die ze hebben.
     int spelerNum [10];
     int bankNum[10];
+    //
     int inzet;
     int loop = 0;
     int bijhoudenSpeler = 2;
@@ -57,13 +60,13 @@ int main(void)
 
     fsmState volgendeStap = uitleg;
 
+    //begin eerste fsm.
     while(1)
     {
         switch(volgendeStap)
         {
         //Deze stap print de intro.
         case uitleg:
-            fflush(stdin);
             loop = 1;
             system("cls");
             system("color 0A");
@@ -84,15 +87,13 @@ int main(void)
             printf("Wat is uw inzet?: ");
             scanf("%d", &inzet);
 
-            //while loop vragen om inzet te confirmen.
-
             volgendeStap = spel;
             break;
 
         //Hier begint het spel.
         case spel:
             {
-                typedef enum   //tweede finite state machine.
+                typedef enum
                 {
                     start,
                     keuzeSpeler,
@@ -103,11 +104,12 @@ int main(void)
 
                 fsmState2 volgStap = start;
 
+                    //begin tweede fsm.
                     while (loop)
                     {
                         switch(volgStap)
                         {
-                        //geeft twee kaarten een speler en bank.
+                        //geeft twee kaarten aan de speler en bank.
                         case start:
                             system("cls");
                             system("mode con: lines=70");
@@ -138,7 +140,6 @@ int main(void)
                         case (keuzeSpeler):
 
                             //speler kiest of hij nog een kaart wilt.
-                            fflush(stdin);  //buffer, soms doet hij raar als ik dit niet doe.
                             printf("Wilt u nog een kaart? (y/n): \n");
                             yesNoSpeler = getchar();
 
@@ -234,7 +235,9 @@ int main(void)
 
                         case (cleanup):
 
-                                //reset al de values die niet in een while loop zitten, als ik dit niet doe werkt de fsm niet.
+                                //reset alle globale values, zonder dit zijn er problemen.
+                                //print ook de credits.
+
                                 printf("\n");
                                 credits();
                                 system("pause");
