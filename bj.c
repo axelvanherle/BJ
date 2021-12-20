@@ -67,6 +67,7 @@ int main(void)
         {
         //Deze stap print de intro.
         case uitleg:
+            fflush(stdin);
             loop = 1;
             system("cls");
             system("color 0A");
@@ -140,6 +141,7 @@ int main(void)
                         case (keuzeSpeler):
 
                             //speler kiest of hij nog een kaart wilt.
+                            fflush(stdin);
                             printf("Wilt u nog een kaart? (y/n): \n");
                             yesNoSpeler = getchar();
 
