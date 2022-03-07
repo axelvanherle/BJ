@@ -1,7 +1,7 @@
 /*
-* Author(s): Axel Vanherle & Tim Coenraerds
+* Author(s): Axel Vanherle
 * Date: 19/12/2021
-* Description: Code Blackjack-game.
+* Description: Code Blackjack-game (opdracht PXL).
 */
 
 #include <stdio.h>
@@ -113,7 +113,7 @@ int main(void)
                         //geeft twee kaarten aan de speler en bank.
                         case start:
                             system("cls");
-                            system("mode con: lines=70");
+                            system("mode con: lines=50");
                             system("color 0E");
 
                             //begin kaarten van de speler
@@ -558,18 +558,6 @@ void credits(void)
     printf("| :\/:  || (__) || :\/:  || (__) |\n");
     printf("| '--'A|| '--'X|| '--'E|| '--'L|\n");
     printf("`------'`------'`------'`------'\n");
-    printf(".------..------.\n");
-    printf("|E.--. ||N.--. |\n");
-    printf("| (\/)  || :(): |\n");
-    printf("| :\/:  || ()() |\n");
-    printf("| '--'E|| '--'N|\n");
-    printf("`------'`------'\n");
-    printf(".------..------..------.\n");
-    printf("|T.--. ||I.--. ||M.--. |\n");
-    printf("| :/\:  || (\/)  || (\/)  |\n");
-    printf("| (__) || :\/:  || :\/:  |\n");
-    printf("| '--'T|| '--'I|| '--'M|\n");
-    printf("`------'`------'`------'\n");
 }
 
 void printScore (int win, int inzet2)
