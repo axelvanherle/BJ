@@ -36,8 +36,7 @@ typedef enum //eerste finite state machine deze gaat door de stappen tot aan spe
     spel,
     uitleg,
     credit,
-    userInput,
-    end
+    userInput
 }fsmState;
 
 int main(void)
